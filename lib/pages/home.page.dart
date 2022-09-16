@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import '../models/button.model.dart';
 import '../widgets/rowButtons.widget.dart';
@@ -11,7 +13,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+List<String> historico = [];
 String textResultados = '';
+String auxiliaOperaciones = "";
 
   @override
   Widget build(BuildContext context) {
@@ -21,148 +25,200 @@ String textResultados = '';
         children: [
           Expanded(
             flex: 2,
-            child: Container(
-              //height: 100,
-              color: Color.fromARGB(255, 248, 228, 166),
-              child: Row(
-                children: [
-                  Text("Operaciones"),
-                ],
+            child: Padding(
+              padding: const EdgeInsets.all(3),
+              child: Container(
+                //height: 100,
+                color: Color.fromARGB(255,64,64,64),
+                child: Row(
+                  children: [
+                    Text(textResultados),
+                  ],
+                ),
               ),
             ),
           ),
-          Container(
-            height: 100,
-            color: Color.fromARGB(255, 250, 203, 170),
-            child: Row(
-              children: [
-                Text(textResultados),
-              ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(3,0,3,3),
+            child: Container(
+              height: 150,
+              color: Color.fromARGB(255,64,64,64),
+              child: Row(
+                children: [
+                  Text(auxiliaOperaciones),
+                ],
+              ),
             ),
           ),
           Expanded(
             flex: 2,
             child: Container(
               height: 100,
-              color: Color.fromARGB(255, 210, 215, 255),
+              color: Color.fromARGB(255,56,56,56),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  filabotones([
-                    ButtonModel(titulo: '%',metodo: (){print("uno");}),
-                    ButtonModel(titulo: 'CE',metodo: (){print("dos");}),
-                    ButtonModel(titulo: 'C',metodo: (){print("tres");}),
-                    ButtonModel(titulo: '<-',metodo: (){print("mas");}),                  
-                  ]), 
-                  filabotones([
-                    ButtonModel(titulo: '1/x',metodo: (){print("uno");}),
-                    ButtonModel(titulo: 'χ²',metodo: (){print("dos");}),
-                    ButtonModel(titulo: '√',metodo: (){print("tres");}),
-                    ButtonModel(titulo: '/',metodo: (){
-                      print(textResultados);
-                      setState(() {
-                        textResultados += "/";
-                      });}),                  
-                  ]), 
+
                   filabotones([
                     ButtonModel(titulo: '7',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += "7";
+                        auxiliaOperaciones += "7";
                       });
                     }),
                     ButtonModel(titulo: '8',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += "8";
+                        auxiliaOperaciones += "8";
                       });
                     }),
                     ButtonModel(titulo: '9',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += "9";
+                        auxiliaOperaciones += "9";
                       });
                     }),
-                    ButtonModel(titulo: 'x',metodo: (){
+                    ButtonModel(titulo: '/',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += "*";
+                        auxiliaOperaciones += " / ";
+                        textResultados += auxiliaOperaciones;
+                        auxiliaOperaciones = "";
                       });
-                    }),                  
+                    }),  
+                    ButtonModel(titulo: '<-',metodo: (){
+                      print(textResultados);
+                      setState(() {
+                        
+                      });
+                    }),  
+                    ButtonModel(titulo: 'C',metodo: (){
+                      print(textResultados);
+                      setState(() {
+                        auxiliaOperaciones = "";
+                        textResultados = "";
+                      });
+                    })                
                   ]),
                   filabotones([
                     ButtonModel(titulo: '4',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += "4";
+                        auxiliaOperaciones += "4";
                       });
                     }),
                     ButtonModel(titulo: '5',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += "5";
+                        auxiliaOperaciones += "5";
                       });
                     }),
                     ButtonModel(titulo: '6',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += "6";
+                        auxiliaOperaciones += "6";
                       });
                     }),
-                    ButtonModel(titulo: '-',metodo: (){
+                    ButtonModel(titulo: '*',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += " - ";
-                      });}),                  
+                        auxiliaOperaciones += "*";
+                        textResultados += auxiliaOperaciones;
+                        auxiliaOperaciones = "";
+                      });
+                    }),   
+                    ButtonModel(titulo: '(',metodo: (){
+                      print(textResultados);
+                      setState(() {
+                        textResultados += "(";
+                      });
+                    }), 
+                    ButtonModel(titulo: ')',metodo: (){
+                      print(textResultados);
+                      setState(() {
+                        textResultados += ")";
+                      });
+                    }),                
                   ]),    
                   filabotones([ 
                     ButtonModel(titulo: '1',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += "1";
+                        auxiliaOperaciones += "1";
                       });
                     }),
                     ButtonModel(titulo: '2',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += "2";
+                        auxiliaOperaciones += "2";
                       });
                     }),
                     ButtonModel(titulo: '3',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += "3";
+                        auxiliaOperaciones += "3";
                       });
                     }),
-                    ButtonModel(titulo: '+',metodo: (){
+                    ButtonModel(titulo: '-',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += " + ";
+                        auxiliaOperaciones += " - ";
+                        textResultados += auxiliaOperaciones;
+                        auxiliaOperaciones = "";
                       });
-                    }),                  
+                    }),  
+                    ButtonModel(titulo: 'χ²',metodo: (){
+                      print(textResultados);
+                      setState(() {
+                        auxiliaOperaciones = "pow($auxiliaOperaciones,2)";
+                        textResultados += auxiliaOperaciones;
+                        auxiliaOperaciones = "";
+                      });
+                    }),     
+                    ButtonModel(titulo: '√',metodo: (){
+                      print(textResultados);
+                      setState(() {
+                        auxiliaOperaciones = "sqrt($auxiliaOperaciones)";
+                        textResultados += auxiliaOperaciones;
+                        auxiliaOperaciones = "";
+                      });
+                    }),             
                   ]),         
                   filabotones([
-                    ButtonModel(titulo: '+/-',metodo: (){print("uno");}),
+                    ButtonModel(titulo: '+/-',metodo: (){
+                      setState(() {
+                        textResultados += "*(-1)";
+                      });
+                    }),
                     ButtonModel(titulo: '0',metodo: (){
                       print(textResultados);
                       setState(() {
                         textResultados += "0";
                       });
                     }),
-                    ButtonModel(titulo: ',',metodo: (){
+                    ButtonModel(titulo: '%',metodo: (){
                       print(textResultados);
                       setState(() {
-                        textResultados += ".";
+                        textResultados += "%";
+                      });
+                    }),
+                    ButtonModel(titulo: '+',metodo: (){
+                      print(textResultados);
+                      setState(() {
+                        auxiliaOperaciones += "+";
+                        textResultados += auxiliaOperaciones;
+                        auxiliaOperaciones = "";
                       });
                     }),
                     ButtonModel(titulo: '=',metodo: (){
+                      textResultados += auxiliaOperaciones;
+                      print(textResultados);
                       print("resultado ${textResultados.interpret()}");
                        setState(() {
                         textResultados = "El resultado es: ${textResultados.interpret()}";
                       });
                     }),                  
-                  ]),  
-                 
+                  ]),
                 ],
               ),
             ),
